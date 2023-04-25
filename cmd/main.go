@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"github.com/rs/cors"
 	"net/http"
 )
 
@@ -20,10 +19,7 @@ func isAuthorised(username, password string) bool {
 }
 
 func greeting(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
-	w.Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Authorization")
+	w.Header().Add("Content-Type", "application/json")
 	username, password, ok := r.BasicAuth()
 	if !ok {
 		w.Header().Add("WWW-Authenticate", `Basic realm="Give username and password"`)
@@ -45,11 +41,8 @@ func greeting(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	c := cors.New(cors.Options{
-		AllowedOrigins: []string{"http://localhost:4200", "http://localhost:8080/example"},
-	})
-	handler := http.HandlerFunc(greeting)
-	err := http.ListenAndServe(":8080", c.Handler(handler))
+	http.HandleFunc("/", greeting)
+	err := http.ListenAndServe(":8080", nil)
 	if err != nil {
 		return
 	}
