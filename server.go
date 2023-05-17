@@ -14,12 +14,12 @@ import (
 )
 
 type App struct {
-	httpServer *http.Server
-
+	httpServer  *http.Server
 	authUseCase auth.UseCase
 }
 
 func main() {
+
 	r := gin.New()
 	r.Use(H.CORSMiddleware())
 
@@ -31,13 +31,14 @@ func main() {
 	fmt.Println("Starting Server at port :8080")
 
 }
-func NewApp() *App {
 
-	authUseCase := any
-	return &App{
-		authUseCase: authUseCase,
-	}
-}
+//func NewApp() *App {
+//
+//	authUseCase := any
+//	return &App{
+//		authUseCase: authUseCase,
+//	}
+//}
 
 func (a *App) Run(port string) error {
 	router := gin.Default()

@@ -62,16 +62,3 @@ func (h *handler) signIn(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, newSignInResponse(STATUS_OK, "", token))
 }
-
-func PostHandler() {
-
-}
-func EditHandler() {
-
-}
-func GetHandler() {
-
-}
-func DeleteHandler() {
-
-}
