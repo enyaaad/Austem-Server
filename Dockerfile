@@ -17,6 +17,7 @@ WORKDIR /root/
 RUN apk update
 RUN apk add git
 RUN apk upgrade
+RUN apk add postgresql-client
 RUN apk --no-cache add curl
 
 COPY --from=0  /go/src/github.com/enyaaad/Austem-Server/.bin/app .
