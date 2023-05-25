@@ -15,6 +15,16 @@ func StartAPI() {
 		productGroup.POST("/add", handlers.PostProduct)
 
 	}
+	userGroup := r.Group("/user")
+	{
+		userGroup.POST("/auth", handlers.Autharization)
+	}
+	projectGroup := r.Group("/project")
+	{
+		projectGroup.GET("/getall", handlers.Autharization)
+		projectGroup.GET("/get", handlers.Autharization)
+		projectGroup.POST("/add", handlers.Autharization)
+	}
 	err := r.Run(":8080")
 	if err != nil {
 		return
